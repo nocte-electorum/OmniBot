@@ -1,8 +1,13 @@
-// Imports
+//---------\\
+// Imports \\
+//---------\\
 require('dotenv').config()
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 
-// Constants
+
+//-----------\\
+// Constants \\
+//-----------\\
 const token: string = (() : string => {
   const t: string | undefined = process.env.TOKEN;
   if (t === undefined) {
@@ -16,6 +21,9 @@ const client = new Client({ intents: [
 ]});
 
 
+//------------\\
+// Bot Events \\
+//------------\\
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
