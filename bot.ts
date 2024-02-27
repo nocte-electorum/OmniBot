@@ -2,7 +2,7 @@
 // Imports \\
 //---------\\
 require('dotenv').config()
-import { Client, Events, GatewayIntentBits } from 'discord.js'
+import { Client, Events, GatewayIntentBits, Message } from 'discord.js'
 
 
 //-----------\\
@@ -31,6 +31,10 @@ const client = new Client({ intents: [
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
+
+client.on(Events.MessageCreate, (msg: Message) => {
+  if (msg.author.bot === true) return;
+})
 
 // Log in to the bot (actually puts it online)
 client.login(token);
