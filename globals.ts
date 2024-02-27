@@ -1,1 +1,1 @@
-export const errorColour = 0xf50202;
+export const ERROR_COLOUR = 0xf50202;
