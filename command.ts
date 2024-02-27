@@ -1,6 +1,11 @@
+// Import Discord message class just to type the 
+// arguments in the actual command function
+import { Message } from "discord.js";
+
 // Define the blueprint contained in every command file
 export class Command {
   // Properties (private, create getters)
+  //
   private _name: string;           // name of the command, showed in help
   private _description: string;    // description of command, showed in help
   private _takes_args: boolean;    // does this command need arguments?
@@ -8,6 +13,7 @@ export class Command {
   private _self_allowed: boolean;  // if yes to above, can the target be the caller?
   private _aliases: string[];      // other command names for this command
   private _hier: boolean;          // short for hierarchichal, should role rank matter for target?
+  public func: (msg: Message, args: string[]) => void;
 
   // Function called when `new Command()` is called
   // This constructor takes an object of properties,
@@ -22,13 +28,14 @@ export class Command {
     aliases?: string[];
     hier?: boolean;
   }) {
-    this.name = props.name || "";
-    this.description = props.description || "";
-    this.takes_args = props.takes_args || false;
-    this.targeted = props.targeted || false;
-    this.self_allowed = props.self_allowed || false;
-    this.aliases = props.aliases || [];
-    this.hier = props.hier || false;
+    this._name = props.name || "";
+    this._description = props.description || "";
+    this._takes_args = props.takes_args || false;
+    this._targeted = props.targeted || false;
+    this._self_allowed = props.self_allowed || false;
+    this._aliases = props.aliases || [];
+    this._hier = props.hier || false;
+    this.func = (): void => {};
   }
 
   // Getters and setters
