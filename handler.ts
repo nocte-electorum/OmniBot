@@ -6,7 +6,7 @@ import fs from 'fs';
 import { Command } from './command';
 
 // Set up command map
-const commands: Map<string, Command> = new Map();
+const commands: Map<Set<string>, Command> = new Map();
 
 // Populate command map with all modules in ./commands
 // this function assumes all modules have a default export which is the command function
@@ -16,6 +16,11 @@ const command_files: string[] = fs.readdirSync("./commands")
 for (const file in command_files) {
   const cmd: Command = await import(file);
   if (cmd.name !== "") {
-    commands.set(cmd.name, cmd);
+    const names: Set<string> = new Set<string>();
+    names.add(cmd.name);
+    for (const alias in cmd.aliases) {
+      names.add(alias);
+    }
+    commands.set(names, cmd);
   }
 }
