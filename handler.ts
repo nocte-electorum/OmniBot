@@ -14,6 +14,6 @@ const command_files: string[] = fs.readdirSync("./commands")
   .filter(file => file.endsWith(".ts") && file !== "template.ts`")
 
 for (const file in command_files) {
-  const cmd_func: (args: string[]) => void = require(file);
+  const cmd_func: (args: string[]) => void = await import(file);
   commands.set(file, cmd_func);
 }
