@@ -8,9 +8,9 @@ export class Command {
   //
   private _name: string;           // name of the command, showed in help
   private _description: string;    // description of command, showed in help
-  private _takes_args: boolean;    // does this command need arguments?
+  private _takesArgs: boolean;    // does this command need arguments?
   private _targeted: boolean;      // does this command target a user as its first argument?
-  private _self_allowed: boolean;  // if yes to above, can the target be the caller?
+  private _selfAllowed: boolean;  // if yes to above, can the target be the caller?
   private _aliases: string[];      // other command names for this command
   private _hier: boolean;          // short for hierarchichal, should role rank matter for target?
   public func: (msg: Message, args: string[]) => void;
@@ -22,17 +22,17 @@ export class Command {
   constructor(props: {
     name?: string;
     description?: string;
-    takes_args?: boolean;
+    takesArgs?: boolean;
     targeted?: boolean;
-    self_allowed?: boolean;
+    selfAllowed?: boolean;
     aliases?: string[];
     hier?: boolean;
   }) {
     this._name = props.name || "";
     this._description = props.description || "";
-    this._takes_args = props.takes_args || false;
+    this._takesArgs = props.takesArgs || false;
     this._targeted = props.targeted || false;
-    this._self_allowed = props.self_allowed || false;
+    this._selfAllowed = props.selfAllowed || false;
     this._aliases = props.aliases || [];
     this._hier = props.hier || false;
     this.func = (): void => {};
@@ -53,11 +53,11 @@ export class Command {
       this._description = value;
   }
 
-  public get takes_args(): boolean {
-      return this._takes_args;
+  public get takesArgs(): boolean {
+      return this._takesArgs;
   }
-  public set takes_args(value: boolean) {
-      this._takes_args = value;
+  public set takesArgs(value: boolean) {
+      this._takesArgs = value;
   }
 
   public get targeted(): boolean {
@@ -67,11 +67,11 @@ export class Command {
       this._targeted = value;
   }
 
-  public get self_allowed(): boolean {
-      return this._self_allowed;
+  public get selfAllowed(): boolean {
+      return this._selfAllowed;
   }
-  public set self_allowed(value: boolean) {
-      this._self_allowed = value;
+  public set selfAllowed(value: boolean) {
+      this._selfAllowed = value;
   }
 
   public get aliases(): string[] {
