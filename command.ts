@@ -14,13 +14,13 @@ export class Command {
   // utilizing `prop || default` to provide defaults in
   // case of undefined (omitted) values
   constructor(props: {
-    name: string;
-    description: string;
-    takes_args: boolean;
-    targeted: boolean;
-    self_allowed: boolean;
-    aliases: string[];
-    hier: boolean;
+    name?: string;
+    description?: string;
+    takes_args?: boolean;
+    targeted?: boolean;
+    self_allowed?: boolean;
+    aliases?: string[];
+    hier?: boolean;
   }) {
     this.name = props.name || "";
     this.description = props.description || "";

@@ -11,7 +11,7 @@ const commands: Map<string, Command> = new Map();
 // Populate command map with all modules in ./commands
 // this function assumes all modules have a default export which is the command function
 const command_files: string[] = fs.readdirSync("./commands")
-  .filter(file => file.endsWith(".ts") && file !== "template.ts")
+  .filter(file => file.endsWith(".ts"))
 
 for (const file in command_files) {
   const cmd: Command = await import(file);
