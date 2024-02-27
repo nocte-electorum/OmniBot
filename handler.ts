@@ -15,5 +15,7 @@ const command_files: string[] = fs.readdirSync("./commands")
 
 for (const file in command_files) {
   const cmd: Command = await import(file);
-  commands.set(file, cmd);
+  if (cmd.name !== "") {
+    commands.set(cmd.name, cmd);
+  }
 }
