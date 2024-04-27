@@ -27,14 +27,34 @@ export function parse(input: string): ParsedCommand | undefined {
   for (let i = 0; i < content.length; i++) {
     const char: string = content[i];
     if (escaped) {
-    }
-    if (char == '"') {
+      // we need a special case here to avoid an infinite loop
+      // with the next case if someone is escaping a backslash
+      currentArg += char;
+    } else if (char == "\\") {
+      escaped = true;
+    } else if (char == '"') {
       if (!stopMode) {
         // Quotes are used for arguments with spaces
         // (similar to a Linux command line)
         stopMode = true;
-        continue; // we don't treat the quote
+        continue; // we don't treat the quote as a letter
+      } else {
+        // we've already encounted a quote
+        args.push(currentArg);
+        currentArg = "";
+        stopMode = false;
       }
+    } else if (char == " " && !stopMode) {
+      // we're not currently inside a quote, so we treat this
+      // as a word break
+      args.push(currentArg);
+      currentArg = "";
+    } else {
+      // otherwise this is any normal character
+      currentArg += char;
     }
   }
+
+  let command = new ParsedCommand(commandName, args);
+  return command;
 }
