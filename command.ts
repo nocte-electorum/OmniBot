@@ -14,7 +14,7 @@ export class Command {
   private _selfAllowed: boolean; // if yes to above, can the target be the caller?
   private _aliases: string[]; // other command names for this command
   private _hier: boolean; // short for hierarchichal, should role rank matter for target?
-  public func: (msg: ParsedCommand, args: string[]) => void;
+  public func: (msg: ParsedCommand) => void;
 
   // Function called when `new Command()` is called
   // This constructor takes an object of properties,
