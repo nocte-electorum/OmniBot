@@ -4,6 +4,7 @@
 
 import fs from "fs";
 import { Command } from "./command";
+import * as logging from "./logging";
 
 // Set up command map
 export const commands: Map<string, Command> = new Map();
@@ -18,8 +19,10 @@ command_files.forEach(async (file: string) => {
   const cmd: Command = await import(`./commands/${file}`);
   if (cmd.name !== "") {
     commands.set(cmd.name, cmd);
+    logging.info(`Loaded ${cmd.name}`);
     for (const alias in cmd.aliases) {
       commands.set(alias, cmd);
+      logging.info(`Registered alias ${alias} for ${cmd.name}`);
     }
   }
 });
