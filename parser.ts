@@ -1,6 +1,8 @@
 // Module to parse arguments from a message
-import { GuildMember } from "discord.js";
+import { GuildMember, Message } from "discord.js";
 import { PREFIX } from "./globals";
+import { Command } from "./command";
+import { commands as CommandMap } from "./handler";
 
 export class ParsedCommand {
   public name: string;
@@ -13,11 +15,25 @@ export class ParsedCommand {
   }
 }
 
-export function parse(input: string): ParsedCommand | undefined {
-  if (input === "" || !input.startsWith(PREFIX)) return undefined;
-  const split: string[] = input.slice(PREFIX.length).split(" ");
+export function parse(input: Message): ParsedCommand | undefined {
+  if (input.content === "" || !input.content.startsWith(PREFIX))
+    return undefined;
+
+  const split: string[] = input.content.slice(PREFIX.length).split(" ");
   const commandName: string = split[0];
-  const content: string = split.slice(1).join(" ");
+
+  let content: string;
+  let target: GuildMember | undefined;
+  let command_info: Command | undefined = CommandMap.get(commandName);
+  if (!command_info) {
+    return undefined; // command doesn't exist
+  } else {
+    if (command_info.targeted) {
+      content = split.slice(1).join(" ");
+    } else {
+      content = split.slice(2).join(" ");
+    }
+  }
 
   const args: string[] = []; // container for parsed args
   let currentArg: string = "";
