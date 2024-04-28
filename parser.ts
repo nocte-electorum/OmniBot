@@ -15,11 +15,10 @@ export class ParsedCommand {
   }
 }
 
-export function parse(input: Message): ParsedCommand | undefined {
-  if (input.content === "" || !input.content.startsWith(PREFIX))
-    return undefined;
+export function parse(msg: Message): ParsedCommand | undefined {
+  if (msg.content === "" || !msg.content.startsWith(PREFIX)) return undefined;
 
-  const split: string[] = input.content.slice(PREFIX.length).split(" ");
+  const split: string[] = msg.content.slice(PREFIX.length).split(" ");
   const commandName: string = split[0];
 
   let content: string;
