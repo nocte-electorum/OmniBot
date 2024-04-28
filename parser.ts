@@ -6,10 +6,12 @@ import { commands as CommandMap } from "./handler";
 
 export class ParsedCommand {
   public name: string;
+  public message: Message;
   public target?: GuildMember;
   public args: string[];
 
-  constructor(name: string, args?: string[]) {
+  constructor(msg: Message, name: string, args?: string[]) {
+    this.message = msg;
     this.name = name;
     this.args = args || [];
   }
@@ -70,6 +72,6 @@ export function parse(msg: Message): ParsedCommand | undefined {
     }
   }
 
-  let command = new ParsedCommand(commandName, args);
+  let command = new ParsedCommand(msg, commandName, args);
   return command;
 }

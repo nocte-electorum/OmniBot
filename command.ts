@@ -1,6 +1,5 @@
 // Import Discord message class just to type the
 // arguments in the actual command function
-import { Message } from "discord.js";
 import { ParsedCommand } from "./parser";
 
 // Define the blueprint contained in every command file
