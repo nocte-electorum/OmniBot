@@ -14,12 +14,12 @@ const command_files: string[] = fs
   .readdirSync("./commands") // read commands directory
   .filter((file) => file.endsWith(".command.ts")); // only find files that end with .ts
 
-for (const file in command_files) {
-  const cmd: Command = await import(file);
+command_files.forEach(async (file: string) => {
+  const cmd: Command = await import(`./commands/${file}`);
   if (cmd.name !== "") {
     commands.set(cmd.name, cmd);
     for (const alias in cmd.aliases) {
       commands.set(alias, cmd);
     }
   }
-}
+});
