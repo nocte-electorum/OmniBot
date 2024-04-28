@@ -16,7 +16,7 @@ const command_files: string[] = fs
   .filter((file) => file.endsWith(".command.ts")); // only find files that end with .ts
 
 command_files.forEach(async (file: string) => {
-  const cmd: Command = await import(`./commands/${file}`);
+  const { default: cmd } = await import(`./commands/${file}`);
   if (cmd.name !== "") {
     commands.set(cmd.name, cmd);
     logging.info(`Loaded ${cmd.name}`);
