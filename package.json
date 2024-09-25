@@ -11,6 +11,6 @@
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
-    "google-images": "^2.1.0"
+    "google-images": "^0.1.4"
   }
 }

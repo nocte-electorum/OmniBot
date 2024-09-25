@@ -1,19 +1,19 @@
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder, User } from "discord.js";
 import { Command } from "../command";
 import { OK_COLOR } from "../globals";
 import { ParsedCommand } from "../parser";
 
-const pfp: Command = new Command({
-  name: "pfp",
+const zpf: Command = new Command({
+  name: "zpf",
 });
 
-pfp.func = (cmd: ParsedCommand): void => {
+zpf.func = (cmd: ParsedCommand): void => {
   const channel = cmd.message.channel;
   const embed: EmbedBuilder = new EmbedBuilder()
     .setColor(OK_COLOR)
     .setDescription("Bot working!")
-    .setImage(cmd.message.author.displayAvatarURL());
+    .setImage(User.avatarURL());
   channel.send({ embeds: [embed] });
 };
 
-export default pfp;
+export default zpf;
