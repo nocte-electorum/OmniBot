@@ -11,7 +11,7 @@ pfp.func = (cmd: ParsedCommand): void => {
   const channel = cmd.message.channel;
   const embed: EmbedBuilder = new EmbedBuilder()
     .setColor(OK_COLOR)
-    .setDescription("Bot working!")
+    .setTitle('PFP of ' + cmd.message.author.username)
     .setImage(cmd.message.author.displayAvatarURL());
   channel.send({ embeds: [embed] });
 };
