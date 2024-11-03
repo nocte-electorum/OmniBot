@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { EmbedBuilder } from "discord.js";
 import { Command } from "../command";
 import { OK_COLOR } from "../globals";
@@ -16,4 +17,16 @@ pfp.func = (cmd: ParsedCommand): void => {
   channel.send({ embeds: [embed] });
 };
 
+=======
+import { Command } from "../command";
+
+const pfp: Command = new Command({
+  name: "pfp",
+  description: "print the pfp of the mentioned user",
+  takesArgs: true,
+  targeted: true,
+  selfAllowed: true,
+});
+
+>>>>>>> Stashed changes
 export default pfp;
